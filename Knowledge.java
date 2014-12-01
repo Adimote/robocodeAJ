@@ -14,29 +14,21 @@ public class Knowledge
     public Knowledge(PersonalSpaceInvader parentRobot){
         parentRobotReference = parentRobot;
     }
-    
-    public Point getMyLocation() {
-        //TODO make this get the robot's location
-        return new Point(0,0);
-    }
 
 	private RobotSnapshot getRobotSnapshot(String name){
-		if(knownRobots.keySet().contains
+		if(!knownRobots.keySet().contains(name)){knownRobots.put(name, new RobotSnapshot())}
+		return knownRobots.get(name);
 	}
 
 	public void updateRobotHits(String name, int hits){
-		
+		getRobotSnapshot(name).setBulletHits(hits)
 	}
 
 	public void updateRobotLocation(String name, double bearing, double distance){
-		
+		getRobotSnapshot(name).setLocation(polarToCartesian(bearing, distance));
 	}
 
-    public double getMyBearing() {
-        //TODO make this get the robot's bearing from north
-        return 90;
-    }
-    public Point polarToCartesian(double distance,double bearing) {
+    public Point polarToCartesian(double bearing,double distance) {
         double offsetx = distance * Math.sin(Math.toRadians(bearing+getMyBearing()));
         double offsety = distance * Math.cos(Math.toRadians(bearing + getMyBearing()));
         return  new Point(getMyLocation().x+offsetx,getMyLocation().y+offsety);

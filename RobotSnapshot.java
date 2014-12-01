@@ -9,8 +9,8 @@ public class RobotSnapshot
 	private Point currentCoordinates;
 	private boolean isActive;
 
-	public RobotSnapshot(int priorBulletHits){
-		bulletHits = priorBulletHits; 
+	public RobotSnapshot(){
+		bulletHits = 0; 
 		isActive = true;
 	}
 	
@@ -29,6 +29,14 @@ public class RobotSnapshot
 	
 	public void setActive(boolean active){
 		isActive = active;
+	}
+	
+	public int getBulletHits(){
+		return bulletHits;
+	}
+	
+	public void setBulletHits(int hits){
+		bulletHits = hits;
 	}
 
 }
