@@ -1,4 +1,5 @@
 package jpml;
+import java.util.HashMap;
 
 import java.util.HashSet;
 
@@ -7,10 +8,8 @@ import java.util.HashSet;
  */
 public class Knowledge
 {
-
-    private HashSet<RobotSnapshot> knownRobots;
-    private PersonalSpaceInvader parentRobotReference;
-
+	private	HashMap<String, RobotSnapshot> knownRobots;
+	private PersonalSpaceInvader parentRobotReference;	
 
     public Knowledge(PersonalSpaceInvader parentRobot){
         parentRobotReference = parentRobot;
@@ -20,6 +19,18 @@ public class Knowledge
         //TODO make this get the robot's location
         return new Point(0,0);
     }
+
+	private RobotSnapshot getRobotSnapshot(String name){
+		if(knownRobots.keySet().contains
+	}
+
+	public void updateRobotHits(String name, int hits){
+		
+	}
+
+	public void updateRobotLocation(String name, double bearing, double distance){
+		
+	}
 
     public double getMyBearing() {
         //TODO make this get the robot's bearing from north

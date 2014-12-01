@@ -4,15 +4,14 @@ package jpml;
  * MyClass - a class by (your name here)
  */
 public class RobotSnapshot
-{
-	private String name;	
+{	
 	private int bulletHits;
 	private Point currentCoordinates;
 	private boolean isActive;
 
-	public Robot(String name, int priorBulletHits){
-		this.name = name;
+	public RobotSnapshot(int priorBulletHits){
 		bulletHits = priorBulletHits; 
+		isActive = true;
 	}
 	
 	public Point getLocation(){
