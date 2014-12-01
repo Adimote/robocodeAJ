@@ -1,5 +1,7 @@
 package jpml;
 
+import robocode.util.Utils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,8 +20,9 @@ public class AntiGravity {
 
 
     private HashMap<String,RobotSnapshot> otherRobots;
+    private double arenaHeight, arenaWidth;
 
-    public AntiGravity(HashMap<String,RobotSnapshot> otherRobots) {
+    public AntiGravity(HashMap<String,RobotSnapshot> otherRobots, double arenaWidth, double arenaHeight) {
         this.otherRobots = otherRobots;
     }
 
@@ -49,11 +52,27 @@ public class AntiGravity {
 
     public Point getAntigravityForce(double x, double y) {
         double xForce=0, yForce=0;
-        for (PointWithPower robotPoints: getRobotPoints(otherRobots)) {
-
+        // Calculate forces for other Robots
+        for (PointWithPower robotPoint: getRobotPoints(otherRobots)) {
+            //calculates bearing and distance
+            double absBearing = Utils.normalAbsoluteAngle(Math.atan2(robotPoint.point.x - x, robotPoint.point.y - y));
+            double distance = robotPoint.point.distance(x,y);
+            xForce -= (Math.sin(absBearing)*robotPoint.power) / (distance * distance);
+            yForce -= (Math.cos(absBearing)*robotPoint.power) / (distance * distance);
         }
 
-        return new Point(0,0);
+        // Calculate forces for Walls
+
+        //East
+        xForce -= WALL_FORCE/(x*x);
+        //North
+        yForce -= WALL_FORCE/(y*y);
+        //South
+        yForce -= WALL_FORCE/((arenaHeight-y)*(arenaHeight-y));
+        //West
+        yForce -= WALL_FORCE/((arenaWidth-x)*(arenaWidth-x));
+
+        return new Point(xForce,yForce);
     }
 
 }
