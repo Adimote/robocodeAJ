@@ -8,6 +8,7 @@ public class RobotSnapshot
 	private String name;	
 	private int bulletHits;
 	private Point currentCoordinates;
+	private boolean isActive;
 
 	public Robot(String name, int priorBulletHits){
 		this.name = name;
@@ -21,6 +22,14 @@ public class RobotSnapshot
 	public Point setLocation(double x, double y){
 		currentCoordinates.x = x;
 		currentCoordinates.y = y;
+	}
+
+	public boolean getActive(){
+		return isActive;
+	}
+	
+	public void setActive(boolean active){
+		isActive = active;
 	}
 
 }

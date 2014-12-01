@@ -18,16 +18,19 @@ public class PersonalSpaceInvader extends AdvancedRobot
 {
 
 	private double previousRobotScannedDistance;
-	private boolean scanPerformed;
 	private HashSet<String> detectedRobots;
 	private HashMap<String, Integer> repressedTrauma;
 	private boolean hasWon;	
 
+	private Knowledge k;
+	private Radar radar;
+
 	public void run() {
 		setColors(new Color(163,73,164),Color.green,Color.yellow,new Color(163,73,164),new Color(163,73,164));
+		k = new Knowledge();
+		radar = new Radar(k);
 		detectedRobots = new HashSet<String>();
 		repressedTrauma = new HashMap<String, Integer>();
-		scanPerformed = false;
 		hasWon = false;
 		try {
 			BufferedReader br = null;
@@ -48,7 +51,6 @@ public class PersonalSpaceInvader extends AdvancedRobot
 		setAdjustRadarForGunTurn(true);
 		setAdjustGunForRobotTurn(true);
 		turnRadarRightRadians(Math.PI * 2);
-		scanPerformed = true;
 		while(true){
         	setTurnRadarRightRadians(Double.POSITIVE_INFINITY);
 			scan();
@@ -56,7 +58,7 @@ public class PersonalSpaceInvader extends AdvancedRobot
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
-		if(scanPerformed){
+		radar.onScannedRobot(e);
 			boolean weakestEnemy = true;
 			if(repressedTrauma.containsKey(e.getName())) for(String r : detectedRobots){
 				if(!repressedTrauma.containsKey(r) || (!r.equals(e.getName()) && detectedRobots.contains(r) && repressedTrauma.get(r) < repressedTrauma.get(e.getName()))){
@@ -79,9 +81,6 @@ public class PersonalSpaceInvader extends AdvancedRobot
 				}
 				previousRobotScannedDistance = e.getDistance(); 
 			}
-		}else{
-			detectedRobots.add(e.getName());
-			System.out.println("Detected " + e.getName() + "...");
 		}
 	}
 
