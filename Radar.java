@@ -11,6 +11,8 @@ public class Radar
 		this.k = k;
 	}
 	 
-	
+	public onScannedRobot(ScannedRobotEvent e){
+		k.updateRobot(e.getName(), e.getBearingRadians(), e.getDistance());
+	}
 	
 }
