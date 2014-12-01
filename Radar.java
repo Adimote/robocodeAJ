@@ -14,7 +14,7 @@ public class Radar
 	}
 	 
 	public void onScannedRobot(ScannedRobotEvent e){
-		k.updateRobot(e.getName(), e.getBearingRadians(), e.getDistance());
+		k.updateRobotLocation(e.getName(), e.getBearingRadians(), e.getDistance());
 	}
 	
 }
