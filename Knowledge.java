@@ -21,7 +21,7 @@ public class Knowledge
 	}
 
 	public void updateRobotHits(String name, int hits){
-		getRobotSnapshot(name).setBulletHits(hits)
+		getRobotSnapshot(name).setBulletHits(hits);
 	}
 
 	public void updateRobotLocation(String name, double bearing, double distance){

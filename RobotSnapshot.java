@@ -18,10 +18,9 @@ public class RobotSnapshot
 		return currentCoordinates;
 	}
 	
-	public Point setLocation(double x, double y){
-		currentCoordinates.x = x;
-		currentCoordinates.y = y;
-	}
+	public Point setLocation(Point p){
+		currentCoordinates = p;
+	} 
 
 	public boolean getActive(){
 		return isActive;
