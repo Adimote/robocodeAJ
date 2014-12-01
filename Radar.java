@@ -5,5 +5,12 @@ package jpml;
  */
 public class Radar
 {
-
+	private Knowledge k;
+	
+	public Radar(Knowledge k){
+		this.k = k;
+	}
+	 
+	
+	
 }

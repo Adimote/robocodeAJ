@@ -77,7 +77,7 @@ public class PersonalSpaceInvader extends AdvancedRobot
 				}else{
 					if(getDistanceRemaining() >= 0 && (e.getDistance() > 20 || getEnergy() > 10)) setAhead(10);
 				}
-				previousRobotScannedDistance = e.getDistance();
+				previousRobotScannedDistance = e.getDistance(); 
 			}
 		}else{
 			detectedRobots.add(e.getName());
