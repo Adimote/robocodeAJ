@@ -29,8 +29,11 @@ public class Knowledge
 	}
 
     public Point polarToCartesian(double bearing,double distance) {
-        double offsetx = distance * Math.sin(Math.toRadians(bearing+getMyBearing()));
-        double offsety = distance * Math.cos(Math.toRadians(bearing + getMyBearing()));
-        return  new Point(getMyLocation().x+offsetx,getMyLocation().y+offsety);
+        Point myLocation = new Point(parentRobotReference.getX(),parentRobotReference.getY());
+        double myHeading = parentRobotReference.getHeading();
+        double offsetX = distance * Math.sin(bearing + myHeading);
+        double offsetY = distance * Math.cos(bearing + myHeading);
+        return  new Point(myLocation.x+offsetX,myLocation.y+offsetY);
     }
 }
+
