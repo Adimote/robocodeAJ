@@ -1,6 +1,6 @@
 package jpml;
 import java.util.HashMap;
-
+import java.
 import java.util.HashSet;
 
 /**
@@ -9,10 +9,13 @@ import java.util.HashSet;
 public class Knowledge
 {
 	private	HashMap<String, RobotSnapshot> knownRobots;
-	private PersonalSpaceInvader parentRobotReference;	
+	private PersonalSpaceInvader parentRobotReference;
+	private ArrayList<Line> avoidanceLines;
 
     public Knowledge(PersonalSpaceInvader parentRobot){
         parentRobotReference = parentRobot;
+		knownRobots = new HashMap<String, RobotSnapshot>();
+		avoidanceLines = new ArrayList<Line>();
     }
 
 	private RobotSnapshot getRobotSnapshot(String name){
@@ -33,7 +36,11 @@ public class Knowledge
         double myHeading = parentRobotReference.getHeading();
         double offsetX = distance * Math.sin(bearing + myHeading);
         double offsetY = distance * Math.cos(bearing + myHeading);
-        return  new Point(myLocation.x+offsetX,myLocation.y+offsetY);
+        return new Point(myLocation.x+offsetX,myLocation.y+offsetY);
     }
+	
+	public Iterator getLineIterator(){
+		return avoidanceLines.Iterator();
+	}
 }
 

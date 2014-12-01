@@ -24,12 +24,14 @@ public class PersonalSpaceInvader extends AdvancedRobot
 
 	private Knowledge k;
 	private Radar radar;
+	private Wheels wheels;
 
 	public void run() {
 		setColors(new Color(163,73,164),Color.green,Color.yellow,new Color(163,73,164),new Color(163,73,164));
 		k = new Knowledge();
 		radar = new Radar(k);
-		detectedRobots = new HashSet<String>();
+		wheels = new Wheels(k);
+		//detectedRobots = new HashSet<String>();
 		repressedTrauma = new HashMap<String, Integer>();
 		hasWon = false;
 		try {
@@ -58,7 +60,7 @@ public class PersonalSpaceInvader extends AdvancedRobot
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
-		radar.onScannedRobot(e);
+			radar.onScannedRobot(e);
 			boolean weakestEnemy = true;
 			if(repressedTrauma.containsKey(e.getName())) for(String r : detectedRobots){
 				if(!repressedTrauma.containsKey(r) || (!r.equals(e.getName()) && detectedRobots.contains(r) && repressedTrauma.get(r) < repressedTrauma.get(e.getName()))){
@@ -72,7 +74,9 @@ public class PersonalSpaceInvader extends AdvancedRobot
 				double gunTurn = getHeadingRadians() + e.getBearingRadians() - getGunHeadingRadians();
 				setTurnGunRightRadians(Utils.normalRelativeAngle(gunTurn));
 				fire(Math.abs(1 - (e.getDistance() / getBattleFieldHeight())) * 3);
-				double botTurn = e.getBearingRadians();
+				//old code: turn directly towards the robot:
+				//double botTurn = e.getBearingRadians();
+				AntiGravity ag = 
 				setTurnRightRadians(Utils.normalRelativeAngle(botTurn));
 				if(e.getEnergy() < getEnergy() || previousRobotScannedDistance < e.getDistance()){
 					setAhead(100);
@@ -152,7 +156,8 @@ public class PersonalSpaceInvader extends AdvancedRobot
 	}
 	
 	public void onPaint(Graphics2D g){
-		if(true){//hasWon){
+		for(
+		if(hasWon){
 			for(int i=0;i<3;i++){
 				Random r = new Random();
 				g.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
