@@ -32,7 +32,7 @@ public class Knowledge
 	}
 
     public Point polarToCartesian(double bearing,double distance) {
-        Point myLocation = new Point(parentRobotReference.getX(),parentRobotReference.getY());
+        Point myLocation = new Point(parentRobotReference.getX(), parentRobotReference.getY());
         double myHeading = parentRobotReference.getHeading();
         double offsetX = distance * Math.sin(bearing + myHeading);
         double offsetY = distance * Math.cos(bearing + myHeading);
@@ -40,7 +40,7 @@ public class Knowledge
     }
 	
 	public Point calculateAntigravity(){
-		return antigravity.getAntiGravityForce(parentRobotReference.x, parentRobotReference.y);
+		return antigravity.getAntiGravityForce(parentRobotReference.getX(), parentRobotReference.getY());
 	}
 	
 	public PersonalSpaceInvader getParent(){
