@@ -1,6 +1,6 @@
 package jpml;
 import java.util.HashMap;
-import java.
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -10,16 +10,16 @@ public class Knowledge
 {
 	private	HashMap<String, RobotSnapshot> knownRobots;
 	private PersonalSpaceInvader parentRobotReference;
-	private ArrayList<Line> avoidanceLines;
+	private AntiGravity antigravity;
 
     public Knowledge(PersonalSpaceInvader parentRobot){
         parentRobotReference = parentRobot;
 		knownRobots = new HashMap<String, RobotSnapshot>();
-		avoidanceLines = new ArrayList<Line>();
+		antigravity = new AntiGravity(knownRobots, parentRobot.getBattleFieldWidth(), parentRobot.getBattleFieldHeight());
     }
 
 	private RobotSnapshot getRobotSnapshot(String name){
-		if(!knownRobots.keySet().contains(name)){knownRobots.put(name, new RobotSnapshot())}
+		if(!knownRobots.keySet().contains(name)){knownRobots.put(name, new RobotSnapshot());}
 		return knownRobots.get(name);
 	}
 
@@ -39,8 +39,12 @@ public class Knowledge
         return new Point(myLocation.x+offsetX,myLocation.y+offsetY);
     }
 	
-	public Iterator getLineIterator(){
-		return avoidanceLines.Iterator();
+	public Point calculateAntigravity(){
+		return antigravity.getAntiGravityForce(parentRobotReference.x, parentRobotReference.y);
+	}
+	
+	public PersonalSpaceInvader getParent(){
+		return parentRobotReference;
 	}
 }
 

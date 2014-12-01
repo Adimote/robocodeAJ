@@ -76,17 +76,18 @@ public class PersonalSpaceInvader extends AdvancedRobot
 				fire(Math.abs(1 - (e.getDistance() / getBattleFieldHeight())) * 3);
 				//old code: turn directly towards the robot:
 				//double botTurn = e.getBearingRadians();
-				AntiGravity ag = 
+				wheels.getNextMotion();
+				/* more old code
 				setTurnRightRadians(Utils.normalRelativeAngle(botTurn));
 				if(e.getEnergy() < getEnergy() || previousRobotScannedDistance < e.getDistance()){
 					setAhead(100);
 				}else{
 					if(getDistanceRemaining() >= 0 && (e.getDistance() > 20 || getEnergy() > 10)) setAhead(10);
 				}
+				*/
 				previousRobotScannedDistance = e.getDistance(); 
 			}
 		}
-	}
 
 	public void onHitByBullet(HitByBulletEvent e) {
 		if(repressedTrauma.containsKey(e.getName())){
@@ -156,7 +157,7 @@ public class PersonalSpaceInvader extends AdvancedRobot
 	}
 	
 	public void onPaint(Graphics2D g){
-		for(
+		//for(
 		if(hasWon){
 			for(int i=0;i<3;i++){
 				Random r = new Random();

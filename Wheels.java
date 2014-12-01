@@ -12,4 +12,10 @@ public class Wheels
 		this.k = k;
 	}
 
+	public void doNextMotion(){
+		Point motionVector = k.calculateAntigravity();
+		setTurnRightRadians(Utils.normalRelativeAngle(motionVector.getBearing()));
+		setAhead(botForward.getMagnitude());
+	}
+
 }
