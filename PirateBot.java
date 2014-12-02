@@ -9,18 +9,27 @@ import java.util.Random;
 /**
  * PersonalSpaceInvader - a robot by JPML
  */
-public class PirateBot extends AdvancedRobot
+public class PirateBot extends RateControlRobot
 {
 	private Knowledge k;
-	private RandomRadar radar;
+	private RadarRandom radar;
 	private Wheels wheels;
 
+	/**
+	 * Called once, put a while true loop in it
+	 */
 	public void run() {
+
+		while (true) {
+			this.setTurnRate(0);
+			// Remembeer to have this though
+			this.execute();
+		}
 
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
-		radar.onScannedRobot(e);
+		k.onScannedRobot(e);
 	}
 
 	public void onHitByBullet(HitByBulletEvent e) {

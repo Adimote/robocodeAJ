@@ -1,4 +1,6 @@
 package jpml;
+import robocode.ScannedRobotEvent;
+
 import java.util.HashMap;
 
 /**
@@ -45,6 +47,10 @@ public class Knowledge
 	
 	public jpml.PirateBot getParent(){
 		return parentRobotReference;
+	}
+
+	public void onScannedRobot(ScannedRobotEvent e){
+		updateRobotLocation(e.getName(), e.getBearingRadians(), e.getDistance());
 	}
 }
 

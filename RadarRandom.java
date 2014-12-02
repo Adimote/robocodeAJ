@@ -7,12 +7,12 @@ import java.util.Random;
 /**
  * MyClass - a class by (your name here)
  */
-public class RandomRadar
+public class RadarRandom
 {
 	private Knowledge k;
 	private Random random;
 
-	public RandomRadar(Knowledge k){
+	public RadarRandom(Knowledge k){
 		this.k = k;
 	}
 
