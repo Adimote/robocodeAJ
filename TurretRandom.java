@@ -7,17 +7,16 @@ import java.util.Random;
  */
 public class TurretRandom extends Turret {
 
+    private Random random = new Random();
+
     public TurretRandom(Knowledge k) {
         super(k);
-    }
+        this.bulletPower = 3;
 
-    public double getRotation() {
-        Random random = new Random();
-        return random.nextDouble()*360 - 180;
     }
 
     @Override
     public void execute() {
-
+        this.rotation = random.nextDouble()*360 - 180;
     }
 }
