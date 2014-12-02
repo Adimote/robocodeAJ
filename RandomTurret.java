@@ -20,6 +20,6 @@ public class RandomTurret {
     }
 
     public double getRotation() {
-        return this.rotation;
+        return random.nextDouble()*360 - 180;
     }
 }
