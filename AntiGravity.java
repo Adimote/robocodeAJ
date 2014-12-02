@@ -1,4 +1,4 @@
-package jpml;
+package PirateBot;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package jpml;
+package PirateBot;
 
 import robocode.util.Utils;
 

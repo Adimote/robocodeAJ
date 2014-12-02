@@ -1,4 +1,4 @@
-package jpml;
+package PirateBot;
 import robocode.ScannedRobotEvent;
 
 import java.util.HashMap;
@@ -11,10 +11,10 @@ import java.util.HashMap;
 public class Knowledge
 {
 	private	HashMap<String, RobotSnapshot> knownRobots;
-	private jpml.PirateBot parentRobotReference;
+	private PirateBot parentRobotReference;
 	private AntiGravity antigravity;
 
-    public Knowledge(jpml.PirateBot parentRobot){
+    public Knowledge(PirateBot parentRobot){
         parentRobotReference = parentRobot;
 		knownRobots = new HashMap<String, RobotSnapshot>();
 		antigravity = new AntiGravity(knownRobots, parentRobot.getBattleFieldWidth(), parentRobot.getBattleFieldHeight());
@@ -45,7 +45,7 @@ public class Knowledge
 		return antigravity.getAntigravityForce(parentRobotReference.getX(), parentRobotReference.getY());
 	}
 	
-	public jpml.PirateBot getParent(){
+	public PirateBot getParent(){
 		return parentRobotReference;
 	}
 

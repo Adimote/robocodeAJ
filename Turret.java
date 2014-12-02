@@ -1,4 +1,4 @@
-package jpml;
+package PirateBot;
 
 /**
  * Created by abs1g14 on 02/12/14.
@@ -6,7 +6,7 @@ package jpml;
 public abstract class Turret {
     protected Knowledge k;
     protected double bulletPower;
-    protected double rotation;
+    protected double rotationRate;
 
     public Turret(Knowledge k){
         this.k = k;
@@ -17,4 +17,8 @@ public abstract class Turret {
     }
 
     public abstract void execute();
+
+    public double getRotationRate() {
+        return rotationRate;
+    }
 }

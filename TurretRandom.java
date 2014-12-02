@@ -1,4 +1,4 @@
-package jpml;
+package PirateBot;
 
 import java.util.Random;
 
@@ -12,11 +12,10 @@ public class TurretRandom extends Turret {
     public TurretRandom(Knowledge k) {
         super(k);
         this.bulletPower = 3;
-
     }
 
     @Override
     public void execute() {
-        this.rotation = random.nextDouble()*360 - 180;
+        this.rotationRate = random.nextDouble()*360 - 180;
     }
 }

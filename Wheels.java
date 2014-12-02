@@ -1,6 +1,4 @@
-package jpml;
-
-import robocode.util.Utils;
+package PirateBot;
 
 /**
  * MyClass - a class by (your name here)
@@ -9,18 +7,18 @@ public abstract class Wheels
 {
 	protected Knowledge k;
 	protected double forward;
-	protected double rotation;
+	protected double rotationRate;
 
 	public Wheels(Knowledge k){
 		this.k = k;
 	}
 
-	public double getNextForward() {
+	public double getForward() {
 		return this.forward;
 	}
 
-	public double getNextRotation() {
-		return this.rotation;
+	public double getRotationRate() {
+		return this.rotationRate;
 	}
 
 	public abstract void execute();

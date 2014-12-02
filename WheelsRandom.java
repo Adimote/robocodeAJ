@@ -1,4 +1,4 @@
-package jpml;
+package PirateBot;
 
 import java.util.Random;
 
@@ -14,7 +14,7 @@ public class WheelsRandom extends Wheels {
 
     @Override
     public void execute() {
-        this.rotation = random.nextDouble()*360 - 180;
+        this.rotationRate = random.nextDouble()*360 - 180;
         this.forward = random.nextDouble()*6 - 3;
     }
 }

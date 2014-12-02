@@ -1,4 +1,4 @@
-package jpml;
+package PirateBot;
 
 import robocode.util.Utils;
 
@@ -14,7 +14,7 @@ public class AntiGravityWheels extends Wheels {
     @Override
     public void execute() {
         Point motionVector = k.calculateAntigravity();
-        this.rotation = Utils.normalRelativeAngle(motionVector.getBearing());
+        this.rotationRate = Utils.normalRelativeAngle(motionVector.getBearing());
         this.forward = motionVector.getMagnitude();
     }
 

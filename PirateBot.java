@@ -1,4 +1,4 @@
-package jpml;
+package PirateBot;
 import robocode.*;
 
 import java.awt.Color;
@@ -7,22 +7,47 @@ import java.awt.Font;
 import java.util.Random;
 
 /**
- * PersonalSpaceInvader - a robot by JPML
+ * PirateBot, a robot based on +U_1F47B
  */
 public class PirateBot extends RateControlRobot
 {
-	private Knowledge k;
-	private RadarRandom radar;
-	private Wheels wheels;
+	private Knowledge k = new Knowledge(this);
+	private Radar radar = new RadarRandom(k);
+	private Turret turret = new TurretRandom(k);
+	private Wheels wheels  = new WheelsRandom(k);
 
 	/**
 	 * Called once, put a while true loop in it
 	 */
 	public void run() {
 
+		// Colour it up
+		//TODO colour it up
+		setColors(new Color(0, 255, 43),
+				new Color(0, 100, 102),
+				new Color(0, 255, 128));
+
+		// Colour the bullets
+		//TODO colour the bullets too
+		setBulletColor(new Color(255, 0, 0));
+
+		// Turn off all the fixed turning
+		this.setAdjustGunForRobotTurn(true);
+		this.setAdjustRadarForGunTurn(true);
+		this.setAdjustGunForRobotTurn(true);
+
 		while (true) {
-			this.setTurnRate(0);
-			// Remembeer to have this though
+			// tell them all to execute
+			radar.execute();
+			turret.execute();
+			wheels.execute();
+
+			// Set the rotations
+			this.setTurnRate(wheels.getRotationRate());
+			this.setRadarRotationRate(radar.getRotationRate());
+			this.setGunRotationRate(turret.getRotationRate());
+
+			// Do all the things
 			this.execute();
 		}
 

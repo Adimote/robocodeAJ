@@ -1,26 +1,21 @@
-package jpml;
-
-import robocode.ScannedRobotEvent;
+package PirateBot;
 
 import java.util.Random;
 
 /**
  * MyClass - a class by (your name here)
  */
-public class RadarRandom
+public class RadarRandom extends Radar
 {
-	private Knowledge k;
 	private Random random;
 
-	public RadarRandom(Knowledge k){
-		this.k = k;
+	public RadarRandom(Knowledge k) {
+		super(k);
 	}
 
-	public double getRotationSpeed() {
-		return random.nextDouble()*360 - 180;
+	@Override
+	public void execute() {
+		this.rotationRate = random.nextDouble()*360 - 180;
 	}
-	 
-	public void onScannedRobot(ScannedRobotEvent e){
-		k.updateRobotLocation(e.getName(), e.getBearingRadians(), e.getDistance());
-	}
+
 }

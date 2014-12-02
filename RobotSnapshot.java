@@ -1,4 +1,4 @@
-package jpml;
+package PirateBot;
 
 /**
  * MyClass - a class by (your name here)
