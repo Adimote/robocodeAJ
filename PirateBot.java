@@ -11,15 +11,20 @@ import java.util.Random;
  */
 public class PirateBot extends RateControlRobot
 {
-	private Knowledge k = new Knowledge(this);
-	private Radar radar = new RadarRandom(k);
-	private Turret turret = new TurretRandom(k);
-	private Wheels wheels  = new WheelsRandom(k);
+	private Knowledge k;
+	private Radar radar;
+	private Turret turret;
+	private Wheels wheels;
 
 	/**
 	 * Called once, put a while true loop in it
 	 */
 	public void run() {
+
+		Knowledge k = new Knowledge(this);
+		Radar radar = new RadarRandom(k);
+		Turret turret = new TurretRandom(k);
+		Wheels wheels  = new WheelsRandom(k);
 
 		// Colour it up
 		//TODO colour it up
