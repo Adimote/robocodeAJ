@@ -1,18 +1,18 @@
 package jpml;
 import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
- * MyClass - a class by (your name here)
+ * Knowledge:
+ * Keeps track of the knowledge of the robot at the given time
+ *
  */
 public class Knowledge
 {
 	private	HashMap<String, RobotSnapshot> knownRobots;
-	private PersonalSpaceInvader parentRobotReference;
+	private jpml.PirateBot parentRobotReference;
 	private AntiGravity antigravity;
 
-    public Knowledge(PersonalSpaceInvader parentRobot){
+    public Knowledge(jpml.PirateBot parentRobot){
         parentRobotReference = parentRobot;
 		knownRobots = new HashMap<String, RobotSnapshot>();
 		antigravity = new AntiGravity(knownRobots, parentRobot.getBattleFieldWidth(), parentRobot.getBattleFieldHeight());
@@ -40,10 +40,10 @@ public class Knowledge
     }
 	
 	public Point calculateAntigravity(){
-		return antigravity.getAntiGravityForce(parentRobotReference.getX(), parentRobotReference.getY());
+		return antigravity.getAntigravityForce(parentRobotReference.getX(), parentRobotReference.getY());
 	}
 	
-	public PersonalSpaceInvader getParent(){
+	public jpml.PirateBot getParent(){
 		return parentRobotReference;
 	}
 }

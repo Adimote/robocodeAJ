@@ -1,7 +1,5 @@
 package jpml;
 
-import robocode.util.Utils;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,6 +22,8 @@ public class AntiGravity {
 
     public AntiGravity(HashMap<String,RobotSnapshot> otherRobots, double arenaWidth, double arenaHeight) {
         this.otherRobots = otherRobots;
+        this.arenaWidth = arenaWidth;
+        this.arenaHeight = arenaHeight;
     }
 
     private class PointWithPower {

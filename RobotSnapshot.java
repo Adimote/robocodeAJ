@@ -20,6 +20,7 @@ public class RobotSnapshot
 	
 	public Point setLocation(Point p){
 		currentCoordinates = p;
+		return currentCoordinates;
 	} 
 
 	public boolean getActive(){
