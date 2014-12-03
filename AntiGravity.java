@@ -15,11 +15,9 @@ public class AntiGravity {
     private static final int OTHER_ROBOT_FORCE = 500;
     private static final int WALL_FORCE = 100;
 
-    private ArrayList<Point> otherRobots;
     private double arenaHeight, arenaWidth;
 
-    public AntiGravity(ArrayList<Point> otherRobots, double arenaWidth, double arenaHeight) {
-        this.otherRobots = otherRobots;
+    public AntiGravity(double arenaWidth, double arenaHeight) {
         this.arenaWidth = arenaWidth;
         this.arenaHeight = arenaHeight;
     }
@@ -33,8 +31,8 @@ public class AntiGravity {
         }
     }
 
-    public Point getAntigravityForce(Point point) {
-        return getAntigravityForce(point.x,point.y);
+    public Point getAntigravityForce(ArrayList<Point> otherRobots, Point point) {
+        return getAntigravityForce(otherRobots, point.x, point.y);
     }
 
     private ArrayList<PointWithPower> getRobotPoints(ArrayList<Point> otherRobots) {
@@ -46,16 +44,16 @@ public class AntiGravity {
         return antiGravityPoints;
     }
 
-    public Point getAntigravityForce(double x, double y) {
+    public Point getAntigravityForce(ArrayList<Point> otherRobots, double x, double y) {
         double xForce=0, yForce=0;
         // Calculate forces for other Robots
-//        for (PointWithPower robotPoint: getRobotPoints(otherRobots)) {
-//            //calculates bearing and distance
-//            double absBearing = robotPoint.point.getHeading();
-//            double distance = robotPoint.point.distance(x,y);
-//            xForce -= (Math.sin(absBearing)*robotPoint.power) / (distance * distance);
-//            yForce -= (Math.cos(absBearing)*robotPoint.power) / (distance * distance);
-//        }
+        for (PointWithPower robotPoint: getRobotPoints(otherRobots)) {
+            //calculates bearing and distance
+            double absBearing = robotPoint.point.getHeading();
+            double distance = robotPoint.point.distance(x,y);
+            xForce -= (Math.sin(absBearing)*robotPoint.power) / (distance * distance);
+            yForce -= (Math.cos(absBearing)*robotPoint.power) / (distance * distance);
+        }
 
         // Calculate forces for Walls
 
