@@ -12,7 +12,7 @@ public class Knowledge
 {
 	private	HashMap<String, OtherRobot> knownRobots;
 	private PirateBot robotParent;
-	private int tick;
+	private int tick = 0;
 
     public Knowledge(PirateBot parentRobot){
         robotParent = parentRobot;
@@ -22,6 +22,7 @@ public class Knowledge
 	public HashMap<String,OtherRobot> getKnownRobots() {
 		return this.knownRobots;
 	}
+
 	public PirateBot getRobotParent(){
 		return robotParent;
 	}

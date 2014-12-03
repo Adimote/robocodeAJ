@@ -23,5 +23,4 @@ public abstract class Wheels
 
 	public abstract void execute();
 
-
 }

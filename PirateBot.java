@@ -21,6 +21,8 @@ public class PirateBot extends RateControlRobot
 	 */
 	public void run() {
 
+		printPirate("Started");
+
 		k = new Knowledge(this);
 		radar = new RadarRandom(k);
 		turret = new TurretRandom(k);
@@ -99,9 +101,8 @@ public class PirateBot extends RateControlRobot
 	}
 	
 	public void onPaint(Graphics2D g){
-		Random r = new Random();
-		g.setColor(new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256)));
+		g.setColor(new Color(255,0,0));
 		g.setFont(new Font("Wingdings",Font.PLAIN,144));
-		g.drawString(Character.toString('N'),(int)this.getX(),(int)this.getY());
+		g.drawString(Character.toString('N'),(int)this.getX()-30,(int)this.getY()-30);
 	}
 }

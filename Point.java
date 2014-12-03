@@ -6,7 +6,7 @@ import robocode.util.Utils;
  * Created by abs1g14 on 01/12/14.
  */
 public class Point {
-    double x=0,y=0;
+    double x,y;
     public Point(double x,double y) {
         this.x = x;
         this.y = y;
