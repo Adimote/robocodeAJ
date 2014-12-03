@@ -19,41 +19,29 @@ public class TrackingRobot extends AdvancedRobot {
         //setAdjustRadarForRobotTurn(true);
 
         //turnGunRight(360);
-        target = null;
 
         while (true) {
             turnGunRight(360);
-            turns ++;
-            if (turns > 2) {
-                turnGunLeft(10);
-            }
-            if (turns > 5) {
-                turnGunRight(10);
-            }
-            if (turns > 12) {
-                target = null;
-                turns = 0;
-                turnGunLeft(360);
-            }
         }
     }
 
     @Override
     public void onScannedRobot(ScannedRobotEvent e) {
-        target = e.getName();
-        System.out.println("Tracking "+e.getName());
+        double power = 500/e.getDistance();
+        fire(power);
 
         if (e.getDistance() > 150) {
             gunTurnAmount = normalRelativeAngleDegrees(getGunHeading() - getHeading() + e.getBearing());
-            setTurnGunRight(gunTurnAmount);
             turnRight(e.getBearing());
-            ahead(e.getDistance() - 100);
-            return;
+            ahead(e.getDistance() - 80);
+            setFire(power);
+            turnGunRight(gunTurnAmount);
+
         }
 
         gunTurnAmount = normalRelativeAngleDegrees(getGunHeading() - getHeading() + e.getBearing());
         turnGunRight(gunTurnAmount);
-        fire(1);
+        fire(power);
 
         scan();
     }
@@ -71,4 +59,15 @@ public class TrackingRobot extends AdvancedRobot {
         fire(3);
         back(150);
     }
+
+    //@Override
+    /*public void onHitByBullet(HitByBulletEvent b) {
+        double x=getX(), y=getY();
+        setTurnLeft(30);
+        back(100);
+        if (x == getX() || y == getY()) {
+            setTurnRight(60);
+            ahead(200);
+        }
+    }*/
 }
