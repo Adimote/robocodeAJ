@@ -18,13 +18,7 @@ public class WheelsAntiGravity extends Wheels {
 
     public WheelsAntiGravity(Knowledge k) {
         super(k);
-        ArrayList<Point> robotLocations = new ArrayList<Point>();
-        for (OtherRobot otherRobot : k.getKnownRobots().values()) {
-            robotLocations.add(otherRobot.getPrediction(k.getTick()).getLocation());
-        }
-
         antiGravity = new AntiGravity(
-            robotLocations,
             k.getRobotParent().getBattleFieldWidth(),
             k.getRobotParent().getBattleFieldHeight()
         );
@@ -34,7 +28,13 @@ public class WheelsAntiGravity extends Wheels {
     public void execute() {
         double x = k.getRobotParent().getX();
         double y = k.getRobotParent().getY();
-        Point motionVector = antiGravity.getAntigravityForce(x, y);
+
+        ArrayList<Point> robotLocations = new ArrayList<Point>();
+
+        for (OtherRobot otherRobot : k.getKnownRobots().values()) {
+            robotLocations.add(otherRobot.getPrediction(k.getTick()).getLocation());
+        }
+        Point motionVector = antiGravity.getAntigravityForce(robotLocations, x, y);
         double angleoffset = Utils.normalRelativeAngle(motionVector.getHeading(k.getRobotParent().getHeadingRadians()));
 
         this.rotationRate = angleoffset * ROT_MULTIPLIER;
