@@ -1,5 +1,6 @@
 package PirateBot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,11 +17,10 @@ public class AntiGravity {
     private static final int OTHER_ROBOT_FORCE = 5;
     private static final int WALL_FORCE = 10;
 
-
-    private HashMap<String,RobotSnapshot> otherRobots;
+    private ArrayList<Point> otherRobots;
     private double arenaHeight, arenaWidth;
 
-    public AntiGravity(HashMap<String,RobotSnapshot> otherRobots, double arenaWidth, double arenaHeight) {
+    public AntiGravity(ArrayList<Point> otherRobots, double arenaWidth, double arenaHeight) {
         this.otherRobots = otherRobots;
         this.arenaWidth = arenaWidth;
         this.arenaHeight = arenaHeight;
@@ -39,13 +39,11 @@ public class AntiGravity {
         return getAntigravityForce(point.x,point.y);
     }
 
-    private ArrayList<PointWithPower> getRobotPoints(HashMap<String,RobotSnapshot> otherRobots) {
+    private ArrayList<PointWithPower> getRobotPoints(ArrayList<Point> otherRobots) {
         ArrayList<PointWithPower> antiGravityPoints = new ArrayList<PointWithPower>();
         // Add all robots to the list
-        for (String robotName : otherRobots.keySet()) {
-            RobotSnapshot robot = otherRobots.get(robotName);
-            Point robotLoc = robot.getLocation();
-            antiGravityPoints.add(new PointWithPower(robotLoc,OTHER_ROBOT_FORCE));
+        for (Point robot : otherRobots) {
+            antiGravityPoints.add(new PointWithPower(robot,OTHER_ROBOT_FORCE));
         }
         return antiGravityPoints;
     }

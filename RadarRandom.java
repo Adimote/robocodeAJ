@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class RadarRandom extends Radar
 {
-	private Random random;
+	private Random random = new Random();
 
 	public RadarRandom(Knowledge k) {
 		super(k);

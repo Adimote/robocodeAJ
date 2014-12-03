@@ -36,6 +36,8 @@ public class PirateBot extends RateControlRobot
 		//TODO colour the bullets too
 		setBulletColor(new Color(255, 0, 0));
 
+		this.getOthers();
+
 		// Turn off all the fixed turning
 		this.setAdjustGunForRobotTurn(true);
 		this.setAdjustRadarForGunTurn(true);
@@ -43,16 +45,17 @@ public class PirateBot extends RateControlRobot
 
 		while (true) {
 			// tell them all to execute
+			k.execute();
 			radar.execute();
 			turret.execute();
 			wheels.execute();
 
 			// Set the rotations
-			this.setTurnRate(wheels.getRotationRate());
 			this.setRadarRotationRate(radar.getRotationRate());
 			this.setGunRotationRate(turret.getRotationRate());
+			this.setTurnRate(wheels.getRotationRate());
 
-			// Do all the things
+			// moves set, execute them
 			this.execute();
 		}
 
