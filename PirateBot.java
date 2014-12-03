@@ -21,10 +21,10 @@ public class PirateBot extends RateControlRobot
 	 */
 	public void run() {
 
-		Knowledge k = new Knowledge(this);
-		Radar radar = new RadarRandom(k);
-		Turret turret = new TurretRandom(k);
-		Wheels wheels  = new WheelsRandom(k);
+		k = new Knowledge(this);
+		radar = new RadarRandom(k);
+		turret = new TurretRandom(k);
+		wheels  = new WheelsAntiGravity(k);
 
 		// Colour it up
 		//TODO colour it up
@@ -54,6 +54,7 @@ public class PirateBot extends RateControlRobot
 			this.setRadarRotationRate(radar.getRotationRate());
 			this.setGunRotationRate(turret.getRotationRate());
 			this.setTurnRate(wheels.getRotationRate());
+			this.setVelocityRate(wheels.getForward());
 
 			// moves set, execute them
 			this.execute();
