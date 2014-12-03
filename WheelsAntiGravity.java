@@ -39,6 +39,8 @@ public class WheelsAntiGravity extends Wheels {
 
         this.rotationRate = angleoffset * ROT_MULTIPLIER;
         this.forward = motionVector.getMagnitude() * VEL_MULTIPLIER / Math.abs(rotationRate);
+        //TODO make this random
+        //TODO add automatic reversing
     }
 
 }
