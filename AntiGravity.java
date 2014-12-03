@@ -1,8 +1,6 @@
 package PirateBot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by abs1g14 on 01/12/14.
@@ -14,8 +12,8 @@ import java.util.HashMap;
  */
 public class AntiGravity {
     // Avoidance Multipliers
-    private static final int OTHER_ROBOT_FORCE = 5;
-    private static final int WALL_FORCE = 10;
+    private static final int OTHER_ROBOT_FORCE = 500;
+    private static final int WALL_FORCE = 100;
 
     private ArrayList<Point> otherRobots;
     private double arenaHeight, arenaWidth;
@@ -53,7 +51,7 @@ public class AntiGravity {
         // Calculate forces for other Robots
         for (PointWithPower robotPoint: getRobotPoints(otherRobots)) {
             //calculates bearing and distance
-            double absBearing = robotPoint.point.getBearing();
+            double absBearing = robotPoint.point.getHeading();
             double distance = robotPoint.point.distance(x,y);
             xForce -= (Math.sin(absBearing)*robotPoint.power) / (distance * distance);
             yForce -= (Math.cos(absBearing)*robotPoint.power) / (distance * distance);
@@ -66,9 +64,9 @@ public class AntiGravity {
         //North
         yForce -= WALL_FORCE/(y*y);
         //South
-        yForce -= WALL_FORCE/((arenaHeight-y)*(arenaHeight-y));
+        yForce += WALL_FORCE/((arenaHeight-y)*(arenaHeight-y));
         //West
-        yForce -= WALL_FORCE/((arenaWidth-x)*(arenaWidth-x));
+        xForce += WALL_FORCE/((arenaWidth-x)*(arenaWidth-x));
 
         return new Point(xForce,yForce);
     }

@@ -17,11 +17,17 @@ public class Point {
     }
 
     public double distance(double x, double y) {
-        return Math.sqrt((x*x)+(y*y));
+        double xd = this.x - x;
+        double yd = this.y - y;
+        return Math.sqrt((xd*xd)+(yd*yd));
     }
 
-    public double getBearing() {
-        return Utils.normalAbsoluteAngle(Math.atan2(this.x - x, this.y - y));
+    public double getHeading(double angle) {
+        return Utils.normalAbsoluteAngle(Math.atan2(this.x, this.y) - angle);
+    }
+
+    public double getHeading() {
+        return Utils.normalAbsoluteAngle(Math.atan2(this.x, this.y));
     }
 
     public double getMagnitude() {

@@ -26,7 +26,7 @@ public class PirateBot extends RateControlRobot
 		k = new Knowledge(this);
 		radar = new RadarRandom(k);
 		turret = new TurretRandom(k);
-		wheels  = new WheelsAntiGravity(k);
+		wheels = new WheelsAntiGravity(k);
 
 		// Colour it up
 		//TODO colour it up

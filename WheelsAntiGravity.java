@@ -9,6 +9,9 @@ import java.util.ArrayList;
  */
 public class WheelsAntiGravity extends Wheels {
 
+    private static double ROT_MULTIPLIER = 5;
+    private static double VEL_MULTIPLIER = 5000;
+    
     private AntiGravity antiGravity ;
 
     public WheelsAntiGravity(Knowledge k) {
@@ -19,17 +22,17 @@ public class WheelsAntiGravity extends Wheels {
         }
 
         antiGravity = new AntiGravity(
-                robotLocations,
-                k.getRobotParent().getBattleFieldWidth(),
-                k.getRobotParent().getBattleFieldHeight()
-            );
+            robotLocations,
+            k.getRobotParent().getBattleFieldWidth(),
+            k.getRobotParent().getBattleFieldHeight()
+        );
     }
 
     @Override
     public void execute() {
         Point motionVector = antiGravity.getAntigravityForce(k.getRobotParent().getX(),k.getRobotParent().getY());
-        this.rotationRate = Utils.normalRelativeAngle(motionVector.getBearing());
-        this.forward = motionVector.getMagnitude();
+        this.rotationRate = Utils.normalRelativeAngle(motionVector.getHeading(k.getRobotParent().getHeading())) * ROT_MULTIPLIER;
+        this.forward = motionVector.getMagnitude() * VEL_MULTIPLIER;
     }
 
 }
