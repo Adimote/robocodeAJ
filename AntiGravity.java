@@ -49,8 +49,9 @@ public class AntiGravity {
         // Calculate forces for other Robots
         for (PointWithPower robotPoint: getRobotPoints(otherRobots)) {
             //calculates bearing and distance
-            double absBearing = robotPoint.point.getHeading();
-            double distance = robotPoint.point.distance(x,y);
+            Point localRobotPoint = new Point(robotPoint.point.x - x,robotPoint.point.y - y);
+            double absBearing = localRobotPoint.getHeading();
+            double distance = localRobotPoint.distance(x,y);
             xForce -= (Math.sin(absBearing)*robotPoint.power) / (distance * distance);
             yForce -= (Math.cos(absBearing)*robotPoint.power) / (distance * distance);
         }

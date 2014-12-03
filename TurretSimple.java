@@ -28,6 +28,6 @@ public class TurretSimple extends Turret {
     }
 
     public double getRotationSpeed() {
-        return 0;
+        return 10;
     }
 }
