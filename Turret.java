@@ -16,6 +16,8 @@ public abstract class Turret {
         return this.bulletPower;
     }
 
+    public boolean canFire() { return true; }
+
     public abstract void execute();
 
     public double getRotationRate() {

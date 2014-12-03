@@ -1,5 +1,7 @@
 package PirateBot;
 
+import robocode.ScannedRobotEvent;
+
 import javax.print.attribute.standard.MediaSize;
 import java.util.Iterator;
 import java.util.Map;
@@ -25,6 +27,16 @@ public class TurretSimple extends Turret {
     public double getBulletPower() {
         double distance = k.getNearestRobot()._2;
         return 500/distance; // choose better value for bullet power.
+    }
+
+    public boolean canFire(ScannedRobotEvent e) {
+        double enemyBearing = e.getBearing();
+        if (Math.abs(k.getRobotParent().getGunHeading() - (k.getRobotParent().getHeading() + enemyBearing)) <= 5) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public double getRotationSpeed() {
