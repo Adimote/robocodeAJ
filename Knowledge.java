@@ -33,7 +33,7 @@ public class Knowledge
 
 	public OtherRobot getOtherRobot(String name) {
 		// if it doesn't exist, add it.
-		if (knownRobots.containsKey(name)) {
+		if (!knownRobots.containsKey(name)) {
 			knownRobots.put(name, new OtherRobot());
 		}
 		return knownRobots.get(name);
@@ -48,7 +48,12 @@ public class Knowledge
     }
 
 	public void onScannedRobot(ScannedRobotEvent e){
-		RobotSnapshot snapshot = new RobotSnapshot(tick, polarToCartesian(e.getBearing(),e.getDistance()), e.getHeading(), e.getVelocity());
+		RobotSnapshot snapshot = new RobotSnapshot(
+				tick,
+				polarToCartesian(e.getBearing(), e.getDistance()),
+				e.getHeading(),
+				e.getVelocity()
+		);
 		getOtherRobot(e.getName()).addSnapshot(snapshot);
 	}
 

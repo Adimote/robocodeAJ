@@ -41,6 +41,7 @@ public class WheelsAntiGravity extends Wheels {
         this.forward = motionVector.getMagnitude() * VEL_MULTIPLIER / Math.abs(rotationRate);
         //TODO make this random
         //TODO add automatic reversing
+        //TODO add proper slowdown for moving
     }
 
 }
