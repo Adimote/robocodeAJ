@@ -6,16 +6,20 @@ package PirateBot;
 public class RobotSnapshot
 {
 	private Point currentLocation;
+	private double currentBearing;
+	private double currentDistance;
 	private double heading;
 	private double velocity;
 	private int tick;
 	private boolean isActive;
 
-	public RobotSnapshot(int tick, Point location, double heading, double velocity) {
+	public RobotSnapshot(int tick, Point location, double heading, double velocity, double bearing, double distance) {
 		this.tick = tick;
 		this.currentLocation = location;
 		this.heading = heading;
 		this.velocity = velocity;
+		this.currentBearing = bearing;
+		this.currentDistance = distance;
 	}
 	
 	public Point getLocation(){
@@ -25,7 +29,15 @@ public class RobotSnapshot
 	public Point setLocation(Point p){
 		currentLocation = p;
 		return currentLocation;
-	} 
+	}
+
+	public double getBearing() {
+		return this.currentBearing;
+	}
+
+	public double getDistance() {
+		return this.currentDistance;
+	}
 
 	public boolean getActive(){
 		return isActive;
