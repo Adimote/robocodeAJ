@@ -10,7 +10,16 @@ public class TurretSimple extends Turret {
 
     @Override
     public void execute() {
-        this.rotationRate = 10;
-        this.bulletPower = 3;
+        this.bulletPower = getBulletPower();
+        this.rotationRate = getRotationSpeed();
+    }
+
+    public double getBulletPower() {
+        return 0;
+        //TODO this
+    }
+
+    public double getRotationSpeed() {
+        return 0;
     }
 }
