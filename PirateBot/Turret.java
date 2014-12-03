@@ -21,4 +21,6 @@ public abstract class Turret {
     public double getRotationRate() {
         return rotationRate;
     }
+
+
 }
