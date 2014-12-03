@@ -78,7 +78,7 @@ public class Knowledge
 				closest = enemy;
 			}
 		}
-		return new Tuple(closest, distance);
+		return new Tuple<OtherRobot, Double>(closest, distance);
 	}
 
 	public void execute() {
