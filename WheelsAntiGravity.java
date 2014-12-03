@@ -9,8 +9,10 @@ import java.util.ArrayList;
  */
 public class WheelsAntiGravity extends Wheels {
 
-    private static double ROT_MULTIPLIER = 5;
-    private static double VEL_MULTIPLIER = 5000;
+    private static double ROT_MULTIPLIER = 10;
+    private static double VEL_MULTIPLIER = 8000;
+
+    private boolean reverse = false;
     
     private AntiGravity antiGravity ;
 
@@ -30,9 +32,13 @@ public class WheelsAntiGravity extends Wheels {
 
     @Override
     public void execute() {
-        Point motionVector = antiGravity.getAntigravityForce(k.getRobotParent().getX(),k.getRobotParent().getY());
-        this.rotationRate = Utils.normalRelativeAngle(motionVector.getHeading(k.getRobotParent().getHeading())) * ROT_MULTIPLIER;
-        this.forward = motionVector.getMagnitude() * VEL_MULTIPLIER;
+        double x = k.getRobotParent().getX();
+        double y = k.getRobotParent().getY();
+        Point motionVector = antiGravity.getAntigravityForce(x, y);
+        double angleoffset = Utils.normalRelativeAngle(motionVector.getHeading(k.getRobotParent().getHeadingRadians()));
+
+        this.rotationRate = angleoffset * ROT_MULTIPLIER;
+        this.forward = motionVector.getMagnitude() * VEL_MULTIPLIER / Math.abs(rotationRate);
     }
 
 }

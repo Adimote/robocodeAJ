@@ -49,24 +49,28 @@ public class AntiGravity {
     public Point getAntigravityForce(double x, double y) {
         double xForce=0, yForce=0;
         // Calculate forces for other Robots
-        for (PointWithPower robotPoint: getRobotPoints(otherRobots)) {
-            //calculates bearing and distance
-            double absBearing = robotPoint.point.getHeading();
-            double distance = robotPoint.point.distance(x,y);
-            xForce -= (Math.sin(absBearing)*robotPoint.power) / (distance * distance);
-            yForce -= (Math.cos(absBearing)*robotPoint.power) / (distance * distance);
-        }
+//        for (PointWithPower robotPoint: getRobotPoints(otherRobots)) {
+//            //calculates bearing and distance
+//            double absBearing = robotPoint.point.getHeading();
+//            double distance = robotPoint.point.distance(x,y);
+//            xForce -= (Math.sin(absBearing)*robotPoint.power) / (distance * distance);
+//            yForce -= (Math.cos(absBearing)*robotPoint.power) / (distance * distance);
+//        }
 
         // Calculate forces for Walls
 
         //East
-        xForce -= WALL_FORCE/(x*x);
-        //North
-        yForce -= WALL_FORCE/(y*y);
+        double east = WALL_FORCE/(x*x);
+        xForce += east;
         //South
-        yForce += WALL_FORCE/((arenaHeight-y)*(arenaHeight-y));
+        double south = WALL_FORCE/(y*y);
+        yForce += south;
+        //North
+        double north = WALL_FORCE/((arenaHeight-y)*(arenaHeight-y));
+        yForce -= north;
         //West
-        xForce += WALL_FORCE/((arenaWidth-x)*(arenaWidth-x));
+        double west = WALL_FORCE/((arenaWidth-x)*(arenaWidth-x));
+        xForce -= west;
 
         return new Point(xForce,yForce);
     }

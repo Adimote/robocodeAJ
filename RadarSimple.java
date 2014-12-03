@@ -11,6 +11,6 @@ public class RadarSimple extends Radar {
 
     @Override
     public void execute() {
-        this.rotationRate = 10;
+        this.rotationRate = 45;
     }
 }

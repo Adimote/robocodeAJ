@@ -24,7 +24,7 @@ public class PirateBot extends RateControlRobot
 		printPirate("Started");
 
 		k = new Knowledge(this);
-		radar = new RadarRandom(k);
+		radar = new RadarSimple(k);
 		turret = new TurretRandom(k);
 		wheels = new WheelsAntiGravity(k);
 
