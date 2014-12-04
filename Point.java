@@ -32,6 +32,15 @@ public class Point {
         return new Point(this.x + offsetX,this.y + offsetY);
     }
 
+    public Tuple<Double, Double> cartesianToPolar(Point point) {
+        return cartesianToPolar(point.x,point.y);
+    }
+
+    // Returns Bearing, Distance
+    public Tuple<Double, Double> cartesianToPolar(double x, double y) {
+        return new Tuple<Double, Double>((Math.atan2(x - this.x,y - this.y)),distance(x,y));
+    }
+
     public double getHeading() {
         return Utils.normalAbsoluteAngle(Math.atan2(this.x, this.y));
     }

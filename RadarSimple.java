@@ -4,6 +4,7 @@ import robocode.ScannedRobotEvent;
 import robocode.util.Utils;
 
 import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
 import java.util.HashSet;
 
 /**
@@ -68,6 +69,7 @@ public class RadarSimple extends Radar {
 
     @Override
     public void execute() {
+        PirateBot me = k.getRobotParent();
         if (this.rescan) {
             this.rotationRate = 45;
             if (this.rescanCount > 8) {
@@ -77,7 +79,23 @@ public class RadarSimple extends Radar {
             }
             this.rescanCount++;
         } else {
-            // Put clever code here
+            double min = 999;
+            double max = -999;
+            for (OtherRobot otherRobot : k.getKnownRobots().values()) {
+                double rotation = otherRobot.getPrediction(k.getTick()).getLocation().cartesianToPolar(me.getX(),me.getY())._1;
+                if (rotation < min) {
+                    min = rotation;
+                }
+                if (rotation > max) {
+                    max = rotation;
+                }
+            }
+            if (me.getRadarHeadingRadians() > (max + Math.PI/5)) {
+                this.rotationRate = Math.min(Math.PI/4,Math.abs(max-min));
+            }
+            if (me.getRadarHeadingRadians() < (min - Math.PI/5)) {
+                this.rotationRate = Math.min(Math.PI/4,Math.abs(max-min));
+            }
             this.rotationRate = 45;
         }
     }

@@ -13,7 +13,8 @@ public class WheelsAntiGravity extends Wheels {
 
     private Random random = new Random();
     private static double ROT_MULTIPLIER = 10;
-    private static double VEL_MULTIPLIER = 8000;
+    private static double VEL_MULTIPLIER = 7000;
+    private Random r = new Random();
 
     private AntiGravity antiGravity ;
     private int reverseTimeout = 0;
@@ -44,21 +45,22 @@ public class WheelsAntiGravity extends Wheels {
                 motionVector.getHeading(k.getRobotParent().getHeadingRadians()+reverseConstant)
                         );
 
-        double forwardsAmount = motionVector.getMagnitude();
-        double forwards = forwardsAmount * VEL_MULTIPLIER / Math.abs(rotationRate);
-        double rotationRate = angleoffset * ROT_MULTIPLIER;
 
+        double forwardsAmount = motionVector.getMagnitude();
+
+        double forwards = forwardsAmount * VEL_MULTIPLIER / Math.abs(rotationRate);
 
         // Random dodging technique
-        if (forwardsAmount < 0.2 && random.nextInt(10) > 2) {
-            forwards += 4;
+        if (forwardsAmount < 0.003 && r.nextInt(10) > 1) {
+            forwards += 5;
             OtherRobot enemy = k.getNearestRobot()._1;
             if (enemy != null) {
-                double otherRobotBearing = enemy.getPrediction(k.getTick()).getBearingFromNorth();
-                angleoffset = Utils.normalRelativeAngle(otherRobotBearing + Math.PI / 2);
-                angleoffset += reverseConstant;
+                double otherRobotBearing = new Point(x,y).cartesianToPolar(enemy.getPrediction(k.getTick()).getLocation())._1;
+                angleoffset = Utils.normalRelativeAngle(otherRobotBearing-k.getRobotParent().getHeadingRadians() + Math.PI / 2 + reverseConstant);
             }
         }
+
+        double rotationRate = angleoffset * ROT_MULTIPLIER;
 
         // Add reversing
         if (reverse) {
@@ -66,7 +68,7 @@ public class WheelsAntiGravity extends Wheels {
         }
 
         reverseTimeout --;
-        if (Math.abs(angleoffset) > Math.PI/2 && reverseTimeout <= 0) {
+        if (Math.abs(angleoffset) > Math.PI/2){
             reverseTimeout = 5;
             reverse = !reverse;
         }

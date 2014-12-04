@@ -78,7 +78,7 @@ public class PirateBot extends RateControlRobot
 
 	public void onHitByBullet(HitByBulletEvent e) {
 		printPirate("Been hit!");
-		wheels.randomMove(1);
+//		wheels.randomMove(1);
 	}
 	
 	public void onHitWall(HitWallEvent e) {
@@ -114,7 +114,6 @@ public class PirateBot extends RateControlRobot
 		g.setColor(new Color(255,0,0));
 		g.setFont(new Font("Arial",Font.PLAIN,144));
 		g.drawString(Character.toString('☠'),(int)this.getX()-30,(int)this.getY()-30);
-
 
 		g.setFont(new Font("Arial",Font.PLAIN,44));
 		Point nearestRobotLocation = k.getNearestRobot()._1.getLastSnapshot().getLocation();

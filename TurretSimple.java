@@ -3,10 +3,14 @@ package PirateBot;
 import robocode.AdvancedRobot;
 import robocode.util.Utils;
 
+import java.util.Random;
+
 /**
  * Created by andy on 03/12/14.
  */
 public class TurretSimple extends Turret {
+    public Random r = new Random();
+
     public TurretSimple(Knowledge k) {
         super(k);
     }
@@ -51,7 +55,7 @@ public class TurretSimple extends Turret {
         if (otherRobot._1 == null) {
             return 20;
         }
-        double enemyBearing = otherRobot._1.getPrediction(k.getTick()).getBearingFromNorth();
-        return Utils.normalRelativeAngle(enemyBearing - me.getGunHeadingRadians())*20;
+        double enemyBearing = new Point(me.getX(),me.getY()).cartesianToPolar(otherRobot._1.getPrediction(k.getTick()).getLocation())._1;
+        return Utils.normalRelativeAngle(enemyBearing - me.getGunHeadingRadians())*30;
     }
 }
