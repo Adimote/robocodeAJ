@@ -36,5 +36,15 @@ public class OtherRobot {
         //TODO make this predict.
         return getLastSnapshot().getVelocity();
     }
+
+    private double predictBearing() {
+        //TODO make this predict.
+        return getLastSnapshot().getBearing();
+    }
+
+    private double predictDistance() {
+        //TODO make this predict.
+        return getLastSnapshot().getDistance();
+    }
 }
 
