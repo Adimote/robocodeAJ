@@ -2,17 +2,21 @@ package PirateBot;
 
 import robocode.util.Utils;
 
+import javax.print.attribute.standard.MediaSize;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by abs1g14 on 02/12/14.
  */
 public class WheelsAntiGravity extends Wheels {
 
+    private Random random = new Random();
     private static double ROT_MULTIPLIER = 10;
     private static double VEL_MULTIPLIER = 8000;
 
     private AntiGravity antiGravity ;
+    private int reverseTimeout = 0;
 
     private boolean reverse = false;
 
@@ -40,15 +44,30 @@ public class WheelsAntiGravity extends Wheels {
                 motionVector.getHeading(k.getRobotParent().getHeadingRadians()+reverseConstant)
                         );
 
-        double forwards = motionVector.getMagnitude() * VEL_MULTIPLIER / Math.abs(rotationRate);
+        double forwardsAmount = motionVector.getMagnitude();
+        double forwards = forwardsAmount * VEL_MULTIPLIER / Math.abs(rotationRate);
         double rotationRate = angleoffset * ROT_MULTIPLIER;
+
+
+        // Random dodging technique
+        if (forwardsAmount < 0.2 && random.nextInt(10) > 2) {
+            forwards += 4;
+            OtherRobot enemy = k.getNearestRobot()._1;
+            if (enemy != null) {
+                double otherRobotBearing = enemy.getPrediction(k.getTick()).getBearingFromNorth();
+                angleoffset = Utils.normalRelativeAngle(otherRobotBearing + Math.PI / 2);
+                angleoffset += reverseConstant;
+            }
+        }
 
         // Add reversing
         if (reverse) {
             forwards = -forwards;
         }
 
-        if (Math.abs(angleoffset) > Math.PI/2) {
+        reverseTimeout --;
+        if (Math.abs(angleoffset) > Math.PI/2 && reverseTimeout <= 0) {
+            reverseTimeout = 5;
             reverse = !reverse;
         }
 

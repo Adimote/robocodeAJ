@@ -1,11 +1,14 @@
 package PirateBot;
 
+import robocode.ScannedRobotEvent;
+import robocode.util.Utils;
+
 /**
  * Created by abs1g14 on 02/12/14.
  */
 public abstract class Radar {
 
-    private Knowledge k;
+    protected Knowledge k;
     protected double rotationRate;
 
     public Radar(Knowledge k){
