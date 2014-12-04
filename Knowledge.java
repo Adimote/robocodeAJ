@@ -44,9 +44,9 @@ public class Knowledge
 		RobotSnapshot snapshot = new RobotSnapshot(
 				tick,
 				new Point(robotParent.getX(),robotParent.getY()).polarToCartesian(e.getBearingRadians(), e.getDistance(), robotParent.getHeadingRadians()),
-				e.getHeading(),
+				e.getHeadingRadians(),
 				e.getVelocity(),
-				e.getBearingRadians(),
+				e.getBearingRadians() + getRobotParent().getHeadingRadians(),
 				e.getDistance(),
 				e
 		);

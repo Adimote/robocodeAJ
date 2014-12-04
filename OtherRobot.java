@@ -18,7 +18,7 @@ public class OtherRobot {
     }
 
     public RobotSnapshot getPrediction(int tick) {
-        RobotSnapshot prediction = new RobotSnapshot(tick,predictLocation(),predictHeading(), predictVelocity(), predictBearing(), predictDistance());
+        RobotSnapshot prediction = new RobotSnapshot(tick,predictLocation(),predictHeading(), predictVelocity(), predictBearingFromNorth(), predictDistance());
         return prediction;
     }
 
@@ -37,9 +37,9 @@ public class OtherRobot {
         return getLastSnapshot().getVelocity();
     }
 
-    private double predictBearing() {
+    private double predictBearingFromNorth() {
         //TODO make this predict.
-        return getLastSnapshot().getBearing();
+        return getLastSnapshot().getBearingFromNorth();
     }
 
     private double predictDistance() {

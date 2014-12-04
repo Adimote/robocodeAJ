@@ -8,7 +8,7 @@ import robocode.ScannedRobotEvent;
 public class RobotSnapshot
 {
 	private Point currentLocation;
-	private double currentBearing;
+	private double bearingFromNorth;
 	private double currentDistance;
 	private double heading;
 	private double velocity;
@@ -16,17 +16,17 @@ public class RobotSnapshot
 	private boolean isActive;
 	private ScannedRobotEvent event;
 
-	public RobotSnapshot(int tick, Point location, double heading, double velocity, double bearing, double distance) {
+	public RobotSnapshot(int tick, Point location, double heading, double velocity, double bearingFromNorth, double distance) {
 		this.tick = tick;
 		this.currentLocation = location;
 		this.heading = heading;
 		this.velocity = velocity;
-		this.currentBearing = bearing;
+		this.bearingFromNorth = bearingFromNorth;
 		this.currentDistance = distance;
 	}
 
-	public RobotSnapshot(int tick, Point location, double heading, double velocity, double bearing, double distance, ScannedRobotEvent event) {
-		this(tick, location, heading, velocity, bearing, distance);
+	public RobotSnapshot(int tick, Point location, double heading, double velocity, double bearingFromNorth, double distance, ScannedRobotEvent event) {
+		this(tick, location, heading, velocity, bearingFromNorth, distance);
 		this.event = event;
 	}
 
@@ -43,8 +43,8 @@ public class RobotSnapshot
 		return currentLocation;
 	}
 
-	public double getBearing() {
-		return this.currentBearing;
+	public double getBearingFromNorth() {
+		return this.bearingFromNorth;
 	}
 
 	public double getDistance() {

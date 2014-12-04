@@ -1,12 +1,7 @@
 package PirateBot;
 
 import robocode.AdvancedRobot;
-import robocode.ScannedRobotEvent;
 import robocode.util.Utils;
-
-import javax.print.attribute.standard.MediaSize;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * Created by andy on 03/12/14.
@@ -40,7 +35,7 @@ public class TurretSimple extends Turret {
      */
     public boolean canFire() {
         OtherRobot enemy = k.getNearestRobot()._1;
-        double enemyBearing =  enemy.getPrediction(k.getTick()).getBearing();
+        double enemyBearing =  enemy.getPrediction(k.getTick()).getBearingFromNorth();
         if (Math.abs(Utils.normalAbsoluteAngle(k.getRobotParent().getGunHeadingRadians() - enemyBearing)) <= (Math.PI/36)) {
             return true;
         } else {
@@ -51,11 +46,11 @@ public class TurretSimple extends Turret {
 
     public double getRotationSpeed() {
         Tuple<OtherRobot,Double> otherRobot = k.getNearestRobot();
+        AdvancedRobot me = k.getRobotParent();
         if (otherRobot._1 == null) {
             return 20;
         }
-        double enemyBearing = otherRobot._1.getPrediction(k.getTick()).getBearing();
-        AdvancedRobot me = k.getRobotParent();
-        return enemyBearing - me.getGunHeading();
+        double enemyBearing = otherRobot._1.getPrediction(k.getTick()).getBearingFromNorth();
+        return Utils.normalAbsoluteAngle(enemyBearing - me.getGunHeading());
     }
 }
