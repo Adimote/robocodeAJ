@@ -97,7 +97,7 @@ public class PirateBot extends RateControlRobot
 	}
 
 	public void printPirate(String string) {
-		System.out.println("☠"+string+"☠");
+		System.out.println("☠ "+string+" ☠");
 	}
 	
 	public void onPaint(Graphics2D g){

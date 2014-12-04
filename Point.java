@@ -26,6 +26,12 @@ public class Point {
         return Utils.normalAbsoluteAngle(Math.atan2(this.x, this.y) - angle);
     }
 
+    public Point polarToCartesian(double bearing,double distance, double myHeading) {
+        double offsetX = distance * Math.sin(bearing + myHeading);
+        double offsetY = distance * Math.cos(bearing + myHeading);
+        return new Point(this.x + offsetX,this.y + offsetY);
+    }
+
     public double getHeading() {
         return Utils.normalAbsoluteAngle(Math.atan2(this.x, this.y));
     }

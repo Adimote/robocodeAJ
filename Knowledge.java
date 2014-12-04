@@ -41,18 +41,10 @@ public class Knowledge
 		return knownRobots.get(name);
 	}
 
-    public Point polarToCartesian(double bearing,double distance) {
-        Point myLocation = new Point(robotParent.getX(), robotParent.getY());
-        double myHeading = robotParent.getHeadingRadians();
-        double offsetX = distance * Math.sin(bearing + myHeading);
-        double offsetY = distance * Math.cos(bearing + myHeading);
-        return new Point(myLocation.x + offsetX,myLocation.y + offsetY);
-    }
-
 	public void onScannedRobot(ScannedRobotEvent e){
 		RobotSnapshot snapshot = new RobotSnapshot(
 				tick,
-				polarToCartesian(e.getBearingRadians(), e.getDistance()),
+				new Point(robotParent.getX(),robotParent.getY()).polarToCartesian(e.getBearingRadians(), e.getDistance(), robotParent.getHeadingRadians()),
 				e.getHeading(),
 				e.getVelocity(),
 				e.getBearing(),
