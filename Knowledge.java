@@ -47,9 +47,21 @@ public class Knowledge
 				e.getHeading(),
 				e.getVelocity(),
 				e.getBearing(),
-				e.getDistance()
+				e.getDistance(),
+				e
 		);
 		getOtherRobot(e.getName()).addSnapshot(snapshot);
+	}
+
+	/**
+	 * @return true if the gun has overheated.
+	 */
+	public boolean hasOverheated() {
+		if (getRobotParent().getGunHeat() >= 3.0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -57,21 +69,25 @@ public class Knowledge
 	 * @return Tuple of closest OtherRobot and it's distance from the current location of PirateBot
 	 */
 	public Tuple<OtherRobot,Double> getNearestRobot() {
-		Iterator it = getKnownRobots().entrySet().iterator();
-		Double distance = 10000.0;
-		OtherRobot closest = null;
-		while (it.hasNext()) {
-			Map.Entry pairs = (Map.Entry) it.next();
-			OtherRobot enemy = (OtherRobot)pairs.getValue();
-			RobotSnapshot lastEnemySnapshot = enemy.getPrediction(getTick());
-			Point currentLocation = new Point(robotParent.getX(), robotParent.getY());
-			double possibleMinDistance = currentLocation.distance(lastEnemySnapshot.getLocation());
-			if (possibleMinDistance < distance) {
-				distance = possibleMinDistance;
-				closest = enemy;
+		try {
+			Iterator it = getKnownRobots().entrySet().iterator();
+			Double distance = 10000.0;
+			OtherRobot closest = null;
+			while (it.hasNext()) {
+				Map.Entry pairs = (Map.Entry) it.next();
+				OtherRobot enemy = (OtherRobot) pairs.getValue();
+				RobotSnapshot lastEnemySnapshot = enemy.getPrediction(getTick());
+				Point currentLocation = new Point(robotParent.getX(), robotParent.getY());
+				double possibleMinDistance = currentLocation.distance(lastEnemySnapshot.getLocation());
+				if (possibleMinDistance < distance) {
+					distance = possibleMinDistance;
+					closest = enemy;
+				}
 			}
+			return new Tuple<OtherRobot, Double>(closest, distance);
+		} catch (NullPointerException e) {
+			return  null;
 		}
-		return new Tuple<OtherRobot, Double>(closest, distance);
 	}
 
 

@@ -1,6 +1,7 @@
 package PirateBot;
 
 import robocode.ScannedRobotEvent;
+import robocode.util.Utils;
 
 import javax.print.attribute.standard.MediaSize;
 import java.util.Iterator;
@@ -29,9 +30,17 @@ public class TurretSimple extends Turret {
         return 500/distance; // choose better value for bullet power.
     }
 
-    public boolean canFire(ScannedRobotEvent e) {
-        double enemyBearing = e.getBearing();
-        if (Math.abs(k.getRobotParent().getGunHeading() - (k.getRobotParent().getHeading() + enemyBearing)) <= 5) {
+
+    /**
+     * Supposed to return true if the turret is pointing at the target which has just been scanned. +/- 5 degrees.
+     * target is the nearest last known position of an enemy.
+     * UNTESTED
+     * @return true, if the turret is pointing at the enemy +/- 5 deg. false otherwise.
+     */
+    public boolean canFire() {
+        OtherRobot enemy = k.getNearestRobot()._1;
+        double enemyBearing =  enemy.getLastSnapshot().getEvent().getBearingRadians();
+        if (Math.abs(Utils.normalAbsoluteAngle(k.getRobotParent().getGunHeadingRadians() - enemyBearing)) <= (Math.PI/36)) {
             return true;
         } else {
             return false;
@@ -40,6 +49,6 @@ public class TurretSimple extends Turret {
     }
 
     public double getRotationSpeed() {
-        return 10;
+        return 5;
     }
 }

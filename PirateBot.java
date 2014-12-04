@@ -13,7 +13,7 @@ public class PirateBot extends RateControlRobot
 {
 	private Knowledge k;
 	private Radar radar;
-	private Turret turret;
+	private TurretSimple turret;
 	private Wheels wheels;
 
 	/**
@@ -25,7 +25,7 @@ public class PirateBot extends RateControlRobot
 
 		k = new Knowledge(this);
 		radar = new RadarSimple(k);
-		turret = new TurretRandom(k);
+		turret = new TurretSimple(k);
 		wheels = new WheelsAntiGravity(k);
 
 		// Colour it up
@@ -57,6 +57,15 @@ public class PirateBot extends RateControlRobot
 			this.setGunRotationRate(turret.getRotationRate());
 			this.setTurnRate(wheels.getRotationRate());
 			this.setVelocityRate(wheels.getForward());
+
+			//firing
+			try {
+				if (turret.canFire()) {
+					fire(turret.getBulletPower());
+				}
+			} catch (NullPointerException e) {
+				printPirate("No last robot snapshot.");
+			}
 
 			// moves set, execute them
 			this.execute();

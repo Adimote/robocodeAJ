@@ -1,5 +1,7 @@
 package PirateBot;
 
+import robocode.ScannedRobotEvent;
+
 /**
  * MyClass - a class by (your name here)
  */
@@ -12,6 +14,7 @@ public class RobotSnapshot
 	private double velocity;
 	private int tick;
 	private boolean isActive;
+	private ScannedRobotEvent event;
 
 	public RobotSnapshot(int tick, Point location, double heading, double velocity, double bearing, double distance) {
 		this.tick = tick;
@@ -21,7 +24,16 @@ public class RobotSnapshot
 		this.currentBearing = bearing;
 		this.currentDistance = distance;
 	}
-	
+
+	public RobotSnapshot(int tick, Point location, double heading, double velocity, double bearing, double distance, ScannedRobotEvent event) {
+		this(tick, location, heading, velocity, bearing, distance);
+		this.event = event;
+	}
+
+	public ScannedRobotEvent getEvent() {
+		return event;
+	}
+
 	public Point getLocation(){
 		return currentLocation;
 	}
