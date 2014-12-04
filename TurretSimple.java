@@ -40,7 +40,7 @@ public class TurretSimple extends Turret {
      */
     public boolean canFire() {
         OtherRobot enemy = k.getNearestRobot()._1;
-        double enemyBearing =  enemy.getLastSnapshot().getEvent().getBearingRadians();
+        double enemyBearing =  enemy.getPrediction(k.getTick()).getBearing();
         if (Math.abs(Utils.normalAbsoluteAngle(k.getRobotParent().getGunHeadingRadians() - enemyBearing)) <= (Math.PI/36)) {
             return true;
         } else {
