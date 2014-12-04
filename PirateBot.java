@@ -4,7 +4,6 @@ import robocode.*;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Font;
-import java.util.Random;
 
 /**
  * PirateBot, a robot based on +U_1F47B
@@ -111,7 +110,12 @@ public class PirateBot extends RateControlRobot
 	
 	public void onPaint(Graphics2D g){
 		g.setColor(new Color(255,0,0));
-		g.setFont(new Font("Wingdings",Font.PLAIN,144));
-		g.drawString(Character.toString('N'),(int)this.getX()-30,(int)this.getY()-30);
+		g.setFont(new Font("Arial",Font.PLAIN,144));
+		g.drawString(Character.toString('☠'),(int)this.getX()-30,(int)this.getY()-30);
+
+
+		g.setFont(new Font("Arial",Font.PLAIN,44));
+		Point nearestRobotLocation = k.getNearestRobot()._1.getLastSnapshot().getLocation();
+		g.drawString(Character.toString('.'),(int)nearestRobotLocation.x,(int)nearestRobotLocation.y);
 	}
 }
