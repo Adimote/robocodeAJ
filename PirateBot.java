@@ -11,7 +11,7 @@ import java.awt.Font;
 public class PirateBot extends RateControlRobot
 {
 	private Knowledge k;
-	private Radar radar;
+	private RadarSimple radar;
 	private TurretSimple turret;
 	private Wheels wheels;
 
@@ -73,7 +73,7 @@ public class PirateBot extends RateControlRobot
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
-		k.onScannedRobot(e);
+		radar.onScannedRobot(e);
 	}
 
 	public void onHitByBullet(HitByBulletEvent e) {
@@ -89,7 +89,8 @@ public class PirateBot extends RateControlRobot
 	}
 	
 	public void onRobotDeath(RobotDeathEvent e) {
-		printPirate("Killed someone");
+		radar.doRescan();
+		printPirate("someone died");
 	}
 
 	public void onDeath(DeathEvent e){

@@ -41,19 +41,6 @@ public class Knowledge
 		return knownRobots.get(name);
 	}
 
-	public void onScannedRobot(ScannedRobotEvent e){
-		RobotSnapshot snapshot = new RobotSnapshot(
-				tick,
-				new Point(robotParent.getX(),robotParent.getY()).polarToCartesian(e.getBearingRadians(), e.getDistance(), robotParent.getHeadingRadians()),
-				e.getHeadingRadians(),
-				e.getVelocity(),
-				Utils.normalRelativeAngle(e.getBearingRadians() + getRobotParent().getHeadingRadians()),
-				e.getDistance(),
-				e
-		);
-		getOtherRobot(e.getName()).addSnapshot(snapshot);
-	}
-
 	/**
 	 * @return true if the gun has overheated.
 	 */
