@@ -1,5 +1,6 @@
 package PirateBot;
 
+import robocode.AdvancedRobot;
 import robocode.ScannedRobotEvent;
 import robocode.util.Utils;
 
@@ -49,6 +50,12 @@ public class TurretSimple extends Turret {
     }
 
     public double getRotationSpeed() {
-        return 5;
+        Tuple<OtherRobot,Double> otherRobot = k.getNearestRobot();
+        if (otherRobot == null) {
+            return 20;
+        }
+        double enemyBearing = otherRobot._1.getPrediction(k.getTick()).getBearing();
+        AdvancedRobot me = k.getRobotParent();
+        return enemyBearing-me.getGunHeading();
     }
 }
