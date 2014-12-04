@@ -51,11 +51,11 @@ public class TurretSimple extends Turret {
 
     public double getRotationSpeed() {
         Tuple<OtherRobot,Double> otherRobot = k.getNearestRobot();
-        if (otherRobot == null) {
+        if (otherRobot._1 == null) {
             return 20;
         }
         double enemyBearing = otherRobot._1.getPrediction(k.getTick()).getBearing();
         AdvancedRobot me = k.getRobotParent();
-        return enemyBearing-me.getGunHeading();
+        return enemyBearing - me.getGunHeading();
     }
 }

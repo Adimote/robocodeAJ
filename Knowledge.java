@@ -46,7 +46,7 @@ public class Knowledge
 				new Point(robotParent.getX(),robotParent.getY()).polarToCartesian(e.getBearingRadians(), e.getDistance(), robotParent.getHeadingRadians()),
 				e.getHeading(),
 				e.getVelocity(),
-				e.getBearing(),
+				e.getBearingRadians(),
 				e.getDistance(),
 				e
 		);
