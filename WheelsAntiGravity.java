@@ -12,9 +12,9 @@ public class WheelsAntiGravity extends Wheels {
     private static double ROT_MULTIPLIER = 10;
     private static double VEL_MULTIPLIER = 8000;
 
-    private boolean reverse = false;
-    
     private AntiGravity antiGravity ;
+
+    private boolean reverse = false;
 
     public WheelsAntiGravity(Knowledge k) {
         super(k);
@@ -35,10 +35,26 @@ public class WheelsAntiGravity extends Wheels {
             robotLocations.add(otherRobot.getPrediction(k.getTick()).getLocation());
         }
         Point motionVector = antiGravity.getAntigravityForce(robotLocations, x, y);
-        double angleoffset = Utils.normalRelativeAngle(motionVector.getHeading(k.getRobotParent().getHeadingRadians()));
+        double reverseConstant = reverse ? Math.PI : 0;
+        double angleoffset = Utils.normalRelativeAngle(
+                motionVector.getHeading(k.getRobotParent().getHeadingRadians()+reverseConstant)
+                        );
 
-        this.rotationRate = angleoffset * ROT_MULTIPLIER;
-        this.forward = motionVector.getMagnitude() * VEL_MULTIPLIER / Math.abs(rotationRate);
+        double forwards = motionVector.getMagnitude() * VEL_MULTIPLIER / Math.abs(rotationRate);
+        double rotationRate = angleoffset * ROT_MULTIPLIER;
+
+        // Add reversing
+        if (reverse) {
+            forwards = -forwards;
+        }
+
+        if (Math.abs(angleoffset) > Math.PI/2) {
+            reverse = !reverse;
+        }
+
+        this.forward = forwards;
+        this.rotationRate = rotationRate;
+
         //TODO make this random
         //TODO add automatic reversing
         //TODO add proper slowdown for moving
