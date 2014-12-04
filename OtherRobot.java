@@ -18,7 +18,7 @@ public class OtherRobot {
     }
 
     public RobotSnapshot getPrediction(int tick) {
-        RobotSnapshot prediction = new RobotSnapshot(tick,predictLocation(),predictHeading(), predictVelocity(), 0, 0);
+        RobotSnapshot prediction = new RobotSnapshot(tick,predictLocation(),predictHeading(), predictVelocity(), predictBearing(), predictDistance());
         return prediction;
     }
 
