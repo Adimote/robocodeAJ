@@ -78,6 +78,7 @@ public class PirateBot extends RateControlRobot
 
 	public void onHitByBullet(HitByBulletEvent e) {
 		printPirate("Been hit!");
+		wheels.randomMove(1);
 	}
 	
 	public void onHitWall(HitWallEvent e) {
