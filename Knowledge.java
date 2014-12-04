@@ -1,5 +1,6 @@
 package PirateBot;
 import robocode.ScannedRobotEvent;
+import robocode.util.Utils;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -46,7 +47,7 @@ public class Knowledge
 				new Point(robotParent.getX(),robotParent.getY()).polarToCartesian(e.getBearingRadians(), e.getDistance(), robotParent.getHeadingRadians()),
 				e.getHeadingRadians(),
 				e.getVelocity(),
-				e.getBearingRadians() + getRobotParent().getHeadingRadians(),
+				Utils.normalRelativeAngle(e.getBearingRadians() + getRobotParent().getHeadingRadians()),
 				e.getDistance(),
 				e
 		);

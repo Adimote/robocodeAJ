@@ -35,8 +35,9 @@ public class TurretSimple extends Turret {
      */
     public boolean canFire() {
         OtherRobot enemy = k.getNearestRobot()._1;
+        AdvancedRobot me = k.getRobotParent();
         double enemyBearing =  enemy.getPrediction(k.getTick()).getBearingFromNorth();
-        if (Math.abs(Utils.normalAbsoluteAngle(k.getRobotParent().getGunHeadingRadians() - enemyBearing)) <= (Math.PI/36)) {
+        if (Math.abs(Utils.normalRelativeAngle(enemyBearing - me.getGunHeadingRadians())) <= (Math.PI/36)) {
             return true;
         } else {
             return false;
@@ -51,6 +52,6 @@ public class TurretSimple extends Turret {
             return 20;
         }
         double enemyBearing = otherRobot._1.getPrediction(k.getTick()).getBearingFromNorth();
-        return Utils.normalAbsoluteAngle(enemyBearing - me.getGunHeading());
+        return Utils.normalRelativeAngle(enemyBearing - me.getGunHeadingRadians())*20;
     }
 }
