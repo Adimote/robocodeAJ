@@ -8,7 +8,6 @@ import java.util.Map;
 /**
  * Knowledge:
  * Keeps track of the knowledge of the robot at the given time
- *
  */
 public class Knowledge
 {
@@ -74,6 +73,8 @@ public class Knowledge
 		}
 		return new Tuple<OtherRobot, Double>(closest, distance);
 	}
+
+
 
 	public void execute() {
 		tick ++;
